@@ -5,7 +5,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import DraggableCell from './cell/draggable-cell';
 import CellCreator from './cell/cell-creator';
-import { executeCell, focusNextCell, moveCell, getCompletions} from '../actions';
+import { executeCell, focusNextCell, moveCell } from '../actions';
 
 import complete from '../api/messaging/completion';
 
@@ -80,32 +80,8 @@ class Notebook extends React.Component {
     document.removeEventListener('keydown', this.keyDown);
   }
 
-  resolveScrollPosition(id) {
-    const viewportHeight = window.innerHeight;
-    const viewportOffset = document.body.scrollTop;
-
-    const focusedCell = ReactDOM.findDOMNode(this.refs[id]);
-
-    if (focusedCell) {
-      const cellTop = focusedCell.offsetTop;
-      const cellHeight = focusedCell.offsetHeight;
-
-      const belowFold = (cellTop + cellHeight) > (viewportOffset + viewportHeight);
-      const aboveFold = cellTop < viewportOffset;
-
-      if (aboveFold) {
-        document.body.scrollTop = cellTop;
-      }
-
-      if (belowFold) {
-        if (cellHeight > viewportHeight) {
-          document.body.scrollTop = cellTop;
-        } else {
-          const offset = viewportHeight - cellHeight;
-          document.body.scrollTop = cellTop - offset;
-        }
-      }
-    }
+  getCompletions(source, cursor) {
+    return complete(this.props.channels, source, cursor);
   }
 
   keyDown(e) {
@@ -139,9 +115,32 @@ class Notebook extends React.Component {
     }
   }
 
-  getCompletions(source, cursor) {
-      return complete(this.props.channels, source, cursor)
-      
+  resolveScrollPosition(id) {
+    const viewportHeight = window.innerHeight;
+    const viewportOffset = document.body.scrollTop;
+
+    const focusedCell = ReactDOM.findDOMNode(this.refs[id]);
+
+    if (focusedCell) {
+      const cellTop = focusedCell.offsetTop;
+      const cellHeight = focusedCell.offsetHeight;
+
+      const belowFold = (cellTop + cellHeight) > (viewportOffset + viewportHeight);
+      const aboveFold = cellTop < viewportOffset;
+
+      if (aboveFold) {
+        document.body.scrollTop = cellTop;
+      }
+
+      if (belowFold) {
+        if (cellHeight > viewportHeight) {
+          document.body.scrollTop = cellTop;
+        } else {
+          const offset = viewportHeight - cellHeight;
+          document.body.scrollTop = cellTop - offset;
+        }
+      }
+    }
   }
 
   moveCell(sourceId, destinationId, above) {

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import CodeMirror from 'react-code-mirror';
+import CodeMirrorLib from 'codemirror';
 
 import { updateCellSource } from '../../actions';
 
@@ -90,7 +91,11 @@ export default class Editor extends React.Component {
   }
 
   render() {
-    const extraKeys = { 'Ctrl-Space': 'autocomplete' };
+    const extraKeys = {
+      'Ctrl-Space': cm => {
+        CodeMirrorLib.commands.autocomplete(cm, null, { completeSingle: true });
+      },
+    };
     return (
       <div className="cell_editor">
         <CodeMirror
