@@ -239,14 +239,6 @@ export function associateCellToMsg(cellId, msgId) {
   };
 }
 
-export function associateCellToMsg(cellId, msgId) {
-  return {
-    type: constants.ASSOCIATE_CELL_TO_MSG,
-    cellId,
-    msgId,
-  };
-}
-
 export function setForwardCheckpoint(documentState) {
   return {
     type: constants.SET_FORWARD_CHECKPOINT,

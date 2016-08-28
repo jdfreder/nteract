@@ -1,4 +1,3 @@
-import Rx from 'rxjs/Rx';
 import difference from 'lodash.difference';
 import { stateObservable } from './utils';
 

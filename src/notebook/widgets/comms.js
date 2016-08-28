@@ -1,6 +1,6 @@
 import * as uuid from 'uuid';
 import Rx from 'rxjs/Rx';
-import { createMessage } from '../api/messaging';
+import { createMessage } from '../kernel/messaging';
 import { stateObservable } from './utils';
 
 /** TODO: Move to more generic location
