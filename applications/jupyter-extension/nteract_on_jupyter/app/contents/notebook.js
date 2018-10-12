@@ -12,6 +12,7 @@ import {
 } from "@nteract/transforms";
 
 const displayOrder = [
+  "application/vnd.jupyter.widget-view+json",
   "application/vnd.vega.v3+json",
   "application/vnd.vega.v2+json",
   "application/vnd.vegalite.v2+json",

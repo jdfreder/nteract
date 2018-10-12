@@ -1,7 +1,7 @@
 {
-  "name": "@nteract/transforms",
-  "version": "4.4.4",
-  "description": "Common transforms for Jupyter",
+  "name": "@nteract/transform-widgets",
+  "version": "0.0.1",
+  "description": "Transform for rendering Jupyter-JS-Widgets in output areas.",
   "main": "lib/index.js",
   "nteractDesktop": "src/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "transforms",
     "notebook"
   ],
-  "author": "Kyle Kelley <rgbkrk@gmail.com>",
+  "author": "Jonathan Frederic <jon.freder@gmail.com>",
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/nteract/nteract/issues"
@@ -30,12 +30,11 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.0.0",
-    "@nteract/markdown": "^2.1.4",
-    "@nteract/mathjax": "^2.1.4",
-    "@nteract/transform-vdom": "^2.2.3",
-    "@nteract/transform-widgets": "^0.0.1",
+    "@nteract/messaging": "^4.1.4",
+    "@nteract/widget-environment": "^0.0.1",
     "ansi-to-react": "^3.3.3",
     "babel-runtime": "^6.26.0",
+    "prop-types": "^15.6.1",
     "react-json-tree": "^0.11.0"
   },
   "peerDependencies": {

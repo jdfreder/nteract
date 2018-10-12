@@ -9,6 +9,7 @@ import LaTeXDisplay from "./latex.js";
 import SVGDisplay from "./svg.js";
 import { PNGDisplay, JPEGDisplay, GIFDisplay } from "./image.js";
 import VDOMDisplay from "@nteract/transform-vdom";
+import { WidgetDisplay } from "@nteract/transform-widgets";
 
 type Transform = {
   MIMETYPE: string
@@ -24,6 +25,7 @@ export type TransformRegister = {
 
 const tfs = [
   VDOMDisplay,
+  WidgetDisplay,
   JsonDisplay,
   JavaScriptDisplay,
   HTMLDisplay,

@@ -30,6 +30,9 @@ module.exports = {
     publicPath: ASSET_PATH,
     chunkFilename: "[name]-[chunkhash].bundle.js"
   },
+  watchOptions: {
+    poll: true
+  },
   module: {
     rules: [
       {
@@ -40,6 +43,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.html$/,
+        use: "raw-loader"
       }
     ]
   },
