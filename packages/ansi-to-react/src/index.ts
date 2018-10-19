@@ -10,7 +10,6 @@ declare type ParsedAnsiBundleType = {
   style: AnsiStyleType;
   content: React.ReactNode | string;
 }
-
 /**
  * ansiToJson
  * Convert ANSI strings into JSON output.
