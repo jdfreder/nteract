@@ -1,6 +1,5 @@
 /* @flow strict */
 import * as React from "react";
-// $FlowFixMe
 import { ansiToInlineStyle } from "ansi-to-react";
 
 type Props = {
