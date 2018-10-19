@@ -81,7 +81,20 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/scripts",
       "/node_modules/"
-    ]
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.[tj]s?(x)",
+      "**/?(*.)+(spec|test).[tj]s?(x)"
+    ],
+    "transform": {
+      ".*": "babel-jest"
+    }
   },
   "lint-staged": {
     "*.js,!*js.snap": [
