@@ -1,6 +1,15 @@
 import * as React from "react";
-import { ansiToJson } from "anser";
+import { ansiToJson, AnserJsonEntry } from "anser";
 import { escapeCarriageReturn } from "escape-carriage";
+
+declare type AnsiStyleType = {
+  backgroundColor?: string,
+  color?: string,
+}
+declare type ParsedAnsiBundleType = {
+  style: AnsiStyleType;
+  content: React.ReactNode | string;
+}
 
 /**
  * ansiToJson
@@ -11,7 +20,7 @@ import { escapeCarriageReturn } from "escape-carriage";
  * @param {String} input The input string.
  * @return {Array} The parsed input.
  */
-function ansiToJSON(input: string) {
+function ansiToJSON(input: string): AnserJsonEntry[] {
   input = escapeCarriageReturn(input);
   return ansiToJson(input, {
     json: true,
@@ -19,8 +28,8 @@ function ansiToJSON(input: string) {
   });
 }
 
-function ansiJSONtoStyleBundle(ansiBundle) {
-  const style: { backgroundColor?: string, color?: string } = {};
+function ansiJSONtoStyleBundle(ansiBundle: AnserJsonEntry): { content: string, style: AnsiStyleType } {
+  const style: AnsiStyleType = {};
   if (ansiBundle.bg) {
     style.backgroundColor = `rgb(${ansiBundle.bg})`;
   }
@@ -37,11 +46,11 @@ export function ansiToInlineStyle(text: string) {
   return ansiToJSON(text).map(ansiJSONtoStyleBundle);
 }
 
-function linkifyBundle(bundle) {
+function linkifyBundle(bundle: {content: string, style: AnsiStyleType }): ParsedAnsiBundleType {
   return {
     ...bundle,
     content: bundle.content.split(" ").reduce(
-      (result, word, index) => [
+      (result: Array<React.ReactNode | string>, word: string, index: number): Array<React.ReactNode | string> => [
         ...result,
         // Unless word is the first, prepend a space
         index === 0 ? "" : " ",
@@ -65,7 +74,7 @@ function linkifyBundle(bundle) {
   };
 }
 
-function inlineBundleToReact(bundle, key) {
+function inlineBundleToReact(bundle: ParsedAnsiBundleType, key: number): React.ReactNode {
   return React.createElement(
     "span",
     {
