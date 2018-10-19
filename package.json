@@ -51,6 +51,7 @@
     "test:coverage": "npm run test -- --coverage",
     "test:lint": "npm run lint",
     "test:flow": "npm run flow",
+    "test:typescript": "yarn run tsc",
     "flow": "flow",
     "diagnostics": "scripts/kernelspecs-diagnostics.js",
     "verifyBeforePublish": "lerna run prepublishOnly && lerna run prepare",
