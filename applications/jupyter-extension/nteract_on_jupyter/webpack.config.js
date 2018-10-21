@@ -1,8 +1,6 @@
 // @flow
 
 const configurator = require("@nteract/webpack-configurator");
-const babelTypescriptConfig = require("../../babel.typescript.config");
-const babelFlowConfig = require("../../babel.flow.config");
 
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const webpack = require("webpack");
@@ -38,7 +36,6 @@ module.exports = {
         test: /\.js$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
-        options: babelFlowConfig(),
       },
       {
         test: /\.css$/,
@@ -48,7 +45,6 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
-        options: babelTypescriptConfig(),
       },
     ]
   },
