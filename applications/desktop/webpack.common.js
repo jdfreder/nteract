@@ -1,7 +1,5 @@
 const webpack = require("webpack");
 const path = require("path");
-const babelTypescriptConfig = require("../babel.typescript.config");
-const babelFlowConfig = require("../babel.flow.config");
 
 
 const configurator = require("@nteract/webpack-configurator");
@@ -34,19 +32,17 @@ const mainConfig = {
         test: /\.js$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
-        options: babelFlowConfig(),
       },
       {
         test: /\.tsx?$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
-        options: babelTypescriptConfig(),
       },
     ]
   },
   resolve: {
     mainFields: ["nteractDesktop", "es2015", "jsnext:main", "module", "main"],
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: configurator.mergeDefaultAliases()
   },
   plugins: [new webpack.IgnorePlugin(/\.(css|less)$/)]
@@ -82,13 +78,18 @@ const rendererConfig = {
       {
         test: /\.js$/,
         exclude: configurator.exclude,
-        loader: "babel-loader"
-      }
+        loader: "babel-loader",
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: configurator.exclude,
+        loader: "babel-loader",
+      },
     ]
   },
   resolve: {
     mainFields: ["nteractDesktop", "module", "main"],
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: configurator.mergeDefaultAliases()
   },
   plugins: [

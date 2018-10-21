@@ -1138,12 +1138,18 @@ exports[`Plain Should render markdown 1`] = `
   mediaType="text/plain"
 >
   <pre>
-    <span
-      key="0"
-      style={Object {}}
+    <Ansi
+      linkify={false}
     >
-      The text in Spain is mainly plain
-    </span>
+      <code>
+        <span
+          key="0"
+          style={Object {}}
+        >
+          The text in Spain is mainly plain
+        </span>
+      </code>
+    </Ansi>
   </pre>
 </Plain>
 `;
