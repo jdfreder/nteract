@@ -6,7 +6,6 @@ module.exports = function(api) {
   const config = {
     presets: ["@babel/preset-env", "@babel/preset-react"],
     plugins: [
-      "@babel/plugin-transform-flow-strip-types",
       "styled-jsx/babel",
       "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",

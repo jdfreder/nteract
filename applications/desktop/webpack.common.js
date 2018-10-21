@@ -1,12 +1,15 @@
-const path = require("path");
-
-
 const webpack = require("webpack");
+const path = require("path");
+const babelFlowConfig = require("../../babel.flow.config");
+const babelTypescriptConfig = require("../../babel.typescript.config");
+
+
 const configurator = require("@nteract/webpack-configurator");
 
 const nodeModules = {
   jmp: "commonjs jmp",
   canvas: "commonjs canvas",
+  "canvas-prebuilt": "commonjs canvas-prebuilt",
   "nteract-assets": "commonjs nteract-assets",
   "mathjax-electron": "commonjs mathjax-electron"
 };
@@ -31,11 +34,13 @@ const mainConfig = {
         test: /\.js$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelFlowConfig(),
       },
       {
         test: /\.tsx?$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelTypescriptConfig(),
       },
     ]
   },
@@ -78,11 +83,13 @@ const rendererConfig = {
         test: /\.js$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelFlowConfig(),
       },
       {
         test: /\.tsx?$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelTypescriptConfig(),
       },
     ]
   },
