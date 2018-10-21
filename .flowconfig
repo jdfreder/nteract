@@ -18,6 +18,7 @@ emoji=true
 <PROJECT_ROOT>/node_modules/webpack-cli/.nyc_output/.*
 <PROJECT_ROOT>/packages/.*/node_modules
 <PROJECT_ROOT>/applications/jupyter-extension/build/.*
+<PROJECT_ROOT>/packages/.*/lib
 node_modules/
 dist/
 .*static/*
