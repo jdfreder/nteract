@@ -1,5 +1,6 @@
 /* @flow */
 import React from "react";
+// $FlowFixMe
 import Ansi from "ansi-to-react";
 
 type Props = {

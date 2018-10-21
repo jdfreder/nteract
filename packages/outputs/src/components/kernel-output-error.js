@@ -1,5 +1,6 @@
 // @flow strict
 import * as React from "react";
+// $FlowFixMe
 import Ansi from "ansi-to-react";
 import type { ErrorOutput } from "@nteract/records";
 
