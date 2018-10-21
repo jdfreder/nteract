@@ -2,9 +2,7 @@ import * as React from "react";
 import { ansiToJson, AnserJsonEntry } from "anser";
 import { escapeCarriageReturn } from "escape-carriage";
 
-const LINK_REGEX =
-    /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/;
-
+const LINK_REGEX = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/;
 
 /**
  * Converts ANSI strings into JSON output.
@@ -27,7 +25,10 @@ function ansiToJSON(input: string): AnserJsonEntry[] {
  * @param bundle Anser output.
  */
 function convertBundleIntoReact(
-    linkify: boolean, bundle: AnserJsonEntry, key: number): React.ReactNode {
+  linkify: boolean,
+  bundle: AnserJsonEntry,
+  key: number
+): React.ReactNode {
   const style: any = {};
   if (bundle.bg) {
     style.backgroundColor = `rgb(${bundle.bg})`;
@@ -37,37 +38,38 @@ function convertBundleIntoReact(
   }
 
   if (!linkify) {
-    return React.createElement(
-      "span", {style, key}, bundle.content
-    );
+    return React.createElement("span", { style, key }, bundle.content);
   }
 
-  const words = bundle.content.split(" ")
-      .reduce((words: React.ReactNode[], word: string, index: number) => {
-        // If this isn't the first word, re-add the space removed from split.
-        if (index !== 0) {
-          words.push(" ");
-        }
+  const words = bundle.content.split(" ").reduce(
+    (words: React.ReactNode[], word: string, index: number) => {
+      // If this isn't the first word, re-add the space removed from split.
+      if (index !== 0) {
+        words.push(" ");
+      }
 
-        // If  this isn't a link, just return the word as-is.
-        if (!LINK_REGEX.test(word)) {
-          words.push(word);
-          return words;
-        }
-
-        words.push(React.createElement(
-            "a",
-            {
-              key: index,
-              href: word,
-              target: "_blank"
-            },
-            `${word}`));
+      // If  this isn't a link, just return the word as-is.
+      if (!LINK_REGEX.test(word)) {
+        words.push(word);
         return words;
-      }, [] as React.ReactNode[]);
-  return React.createElement(
-    "span", {style, key}, words
+      }
+
+      words.push(
+        React.createElement(
+          "a",
+          {
+            key: index,
+            href: word,
+            target: "_blank"
+          },
+          `${word}`
+        )
+      );
+      return words;
+    },
+    [] as React.ReactNode[]
   );
+  return React.createElement("span", { style, key }, words);
 }
 
 declare type Props = {
@@ -78,7 +80,12 @@ declare type Props = {
 
 export default function Ansi(props: Props): React.ReactNode {
   return React.createElement(
-    "code", { className: props.className },
-    ansiToJSON(props.children)
-        .map(convertBundleIntoReact.bind(this, props.linkify)));
+    "code",
+    { className: props.className },
+    ansiToJSON(props.children).map(
+      /* tslint-disable */
+      convertBundleIntoReact.bind(this, props.linkify)
+      /* tslint-enable */
+    )
+  );
 }

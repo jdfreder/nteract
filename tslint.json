@@ -1,7 +1,7 @@
 {
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
-    "prettier": [true, { "singleQuote": true }],
+    "prettier": [true],
     "align": [true, "parameters", "statements"],
     "ban": [
       true,
