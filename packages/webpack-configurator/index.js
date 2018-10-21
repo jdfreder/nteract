@@ -10,6 +10,8 @@ opaque type Aliases = {[string]: string }
 const rxAliases /* : Aliases */ = require("rxjs/_esm5/path-mapping")();
 
 const { aliases } = require("./aliases");
+const babelFlowConfig = require("../../babel.flow.config");
+const babelTypescriptConfig = require("../../babel.typescript.config");
 
 // We don't transpile packages in node_modules, unless it's _our_ package
 // Also don't transpile @nteract/plotly because it's plotly and massive
@@ -79,19 +81,19 @@ function nextWebpack(
     return rule;
   });
 
-  if (options && options.defaultLoaders) {
-    config.module.rules.push(
-      {
-        test: /\.js$/,
-        exclude: exclude,
-        loader: "babel-loader",
-      },
-      {
-        test: /\.tsx?$/,
-        exclude: exclude,
-        loader: "babel-loader",
-      });
-  }
+  config.module.rules.push(
+    {
+      test: /\.js$/,
+      exclude: exclude,
+      loader: "babel-loader",
+      options: babelFlowConfig(),
+    },
+    {
+      test: /\.tsx?$/,
+      exclude: exclude,
+      loader: "babel-loader",
+      options: babelTypescriptConfig(),
+    });
 
   config.resolve = Object.assign({}, config.resolve, {
     mainFields: ["nteractDesktop", "jsnext:main", "module", "main"],

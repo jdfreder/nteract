@@ -5,6 +5,8 @@ const configurator = require("@nteract/webpack-configurator");
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const webpack = require("webpack");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+const babelFlowConfig = require("../../../babel.flow.config");
+const babelTypescriptConfig = require("../../../babel.typescript.config");
 
 const nodeEnv = process.env.NODE_ENV || "development";
 const isProd = nodeEnv === "production";
@@ -36,6 +38,7 @@ module.exports = {
         test: /\.js$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelFlowConfig(),
       },
       {
         test: /\.css$/,
@@ -45,6 +48,7 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelTypescriptConfig(),
       },
     ]
   },
