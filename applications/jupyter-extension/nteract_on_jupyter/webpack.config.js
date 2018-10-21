@@ -3,6 +3,7 @@ const configurator = require("@nteract/webpack-configurator");
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const webpack = require("webpack");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+
 const babelFlowConfig = require("../../../babel.flow.config");
 const babelTypescriptConfig = require("../../../babel.typescript.config");
 

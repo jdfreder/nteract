@@ -83,9 +83,9 @@ export default function Ansi(props: Props): React.ReactNode {
     "code",
     { className: props.className },
     ansiToJSON(props.children).map(
-      /* tslint-disable */
+      /* tslint:disable */
       convertBundleIntoReact.bind(this, props.linkify)
-      /* tslint-enable */
+      /* tslint:enable */
     )
   );
 }

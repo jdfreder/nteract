@@ -1,10 +1,12 @@
-const webpack = require("webpack");
 const path = require("path");
+
+const webpack = require("webpack");
+const configurator = require("@nteract/webpack-configurator");
+
 const babelFlowConfig = require("../../babel.flow.config");
 const babelTypescriptConfig = require("../../babel.typescript.config");
 
 
-const configurator = require("@nteract/webpack-configurator");
 
 const nodeModules = {
   jmp: "commonjs jmp",

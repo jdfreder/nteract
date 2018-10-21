@@ -9,9 +9,10 @@ opaque type Aliases = {[string]: string }
 
 const rxAliases /* : Aliases */ = require("rxjs/_esm5/path-mapping")();
 
-const { aliases } = require("./aliases");
 const babelFlowConfig = require("../../babel.flow.config");
 const babelTypescriptConfig = require("../../babel.typescript.config");
+
+const { aliases } = require("./aliases");
 
 // We don't transpile packages in node_modules, unless it's _our_ package
 // Also don't transpile @nteract/plotly because it's plotly and massive
@@ -67,7 +68,6 @@ type WebpackConfig = {
 
 function nextWebpack(
   config /*: WebpackConfig */,
-  options /*: ?NextWebPackOptions */
 ) /*: WebpackConfig */ {
   config.externals = ["canvas", ...config.externals];
   config.module.rules = config.module.rules.map(rule => {
