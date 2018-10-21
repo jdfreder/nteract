@@ -1,5 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
+const babelFlowConfig = require("../../babel.flow.config");
+const babelTypescriptConfig = require("../../babel.typescript.config");
 
 
 const configurator = require("@nteract/webpack-configurator");
@@ -32,11 +34,13 @@ const mainConfig = {
         test: /\.js$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelFlowConfig(),
       },
       {
         test: /\.tsx?$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelTypescriptConfig(),
       },
     ]
   },
@@ -79,11 +83,13 @@ const rendererConfig = {
         test: /\.js$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelFlowConfig(),
       },
       {
         test: /\.tsx?$/,
         exclude: configurator.exclude,
         loader: "babel-loader",
+        options: babelTypescriptConfig(),
       },
     ]
   },
