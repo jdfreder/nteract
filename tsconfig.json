@@ -8,6 +8,7 @@
     "lib": ["es2017", "dom"],
     "moduleResolution": "node",
     "composite": true,
+    "declaration": true,
     "paths": {
       "@nteract/*": ["./*/src"]
     }
