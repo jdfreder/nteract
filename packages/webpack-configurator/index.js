@@ -80,18 +80,25 @@ function nextWebpack(
   });
 
   if (options && options.defaultLoaders) {
-    config.module.rules.push({
-      test: /\.js$/,
-      exclude: exclude,
-      use: [options.defaultLoaders.babel]
-    });
+    config.module.rules.push(
+      {
+        test: /\.js$/,
+        exclude: exclude,
+        loader: "babel-loader",
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: exclude,
+        loader: "babel-loader",
+      });
   }
 
   config.resolve = Object.assign({}, config.resolve, {
     mainFields: ["nteractDesktop", "jsnext:main", "module", "main"],
     alias: mergeDefaultAliases(
       config.resolve ? config.resolve.alias : undefined
-    )
+    ),
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   });
   return config;
 }

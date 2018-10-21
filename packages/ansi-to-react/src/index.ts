@@ -28,31 +28,43 @@ function ansiToJSON(input: string): AnserJsonEntry[] {
  */
 function convertBundleIntoReact(
     linkify: boolean, bundle: AnserJsonEntry, key: number): React.ReactNode {
-  const style = {
-    color: `rgb(${bundle.fg})`,
-    backgroundColor: `rgb(${bundle.bg})`,
-  };
+  const style: any = {};
+  if (bundle.bg) {
+    style.backgroundColor = `rgb(${bundle.bg})`;
+  }
+  if (bundle.fg) {
+    style.color = `rgb(${bundle.fg})`;
+  }
+
+  if (!linkify) {
+    return React.createElement(
+      "span", {style, key}, bundle.content
+    );
+  }
+
   const words = bundle.content.split(" ")
-      .map((word: string, index: number) => {
+      .reduce((words: React.ReactNode[], word: string, index: number) => {
         // If this isn't the first word, re-add the space removed from split.
         if (index !== 0) {
-          word = " " + word;
+          words.push(" ");
         }
 
-        // If we don't want to linkify or this isn't a link, just return the
-        // word as-is.
-        const shouldLinkify = linkify && LINK_REGEX.test(word);
-        if (!shouldLinkify) return word;
+        // If  this isn't a link, just return the word as-is.
+        if (!LINK_REGEX.test(word)) {
+          words.push(word);
+          return words;
+        }
 
-        return React.createElement(
+        words.push(React.createElement(
             "a",
             {
               key: index,
               href: word,
               target: "_blank"
             },
-            `${word}`);
-      });
+            `${word}`));
+        return words;
+      }, [] as React.ReactNode[]);
   return React.createElement(
     "span", {style, key}, words
   );

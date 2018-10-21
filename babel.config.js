@@ -6,6 +6,7 @@ module.exports = function(api) {
   const config = {
     presets: ["@babel/preset-env", "@babel/preset-react"],
     plugins: [
+      "@babel/plugin-transform-flow-strip-types",
       "styled-jsx/babel",
       "@babel/plugin-syntax-dynamic-import",
       "@babel/plugin-proposal-object-rest-spread",
@@ -15,7 +16,18 @@ module.exports = function(api) {
         {
           corejs: 2
         }
-      ]
+      ],
+    ],
+    overrides: [
+      {
+        test: ['**/*.js', '**/*.jsx'],
+        presets: ["@babel/preset-flow"],
+        plugins: ["@babel/plugin-transform-flow-strip-types"]
+      },
+      {
+        test: ['**/*.ts', '**/*.tsx'],
+        presets: ["@babel/preset-typescript"],
+      },
     ]
   };
 
